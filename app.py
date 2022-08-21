@@ -1,16 +1,16 @@
-import tkinter as tk #import and nickname the GUI framework
+import tkinter as tk
 from tkinter import filedialog, Text
-import os #Help interface with system
+import os
 
 
-root = tk.Tk() #Create the frame of our app for us to add stuff to
+root = tk.Tk()
 apps = []
 
-if os.path.isfile('save.txt'): #Removes the extra space that is under the chosen apps
+if os.path.isfile('save.txt'): #Remove extra space under the chosen apps
     with open('save.txt', 'r') as f:
         tempApps = f.read()
         tempApps = tempApps.split(',')
-        apps = [x for x in tempApps if x.strip()] #Strips all the empty spaces
+        apps = [x for x in tempApps if x.strip()]
 
 def addApp():
     for widget in frame.winfo_children():
@@ -21,30 +21,28 @@ def addApp():
     apps.append(file_name) #Appends the path of the application we selected to the apps list
     for app in apps:
         label = tk.Label(frame, text=app, bg="gray")
-        label.pack() #Allone this loop will just add the new app selected plus the prevouse apps chosen befor
+        label.pack() #add the new app selected plus the prevouse apps chosen befor
 
 
-canvas = tk.Canvas(root, height=700, width=700, bg="#263D42") #Allows you to set the size of the window
-canvas.pack() #Puts canvas on the screen
+canvas = tk.Canvas(root, height=700, width=700, bg="#263D42") 
+canvas.pack()
 
 frame= tk.Frame(root, bg="white")
-frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1) #The rels put an equal amount of space between the edge and the frame centering it in this case
+frame.place(relwidth=0.8, relheight=0.8, relx=0.1, rely=0.1)
 
-open_file_button = tk.Button(root, text="Open File", padx=10, 
-                            pady=5, fg="white", bg="#263D42", command=addApp) #Be descriptive with names \ Command is used to link the button to a function/method that will allow it to do stuff DO NOT ADD THE () WHEN CALLING THE FUNCTION OR IT WILL RUN THE FUNCTION AS SOON AS THE WINDOW LOADS!!!!
+open_file_button = tk.Button(root, text="Open File", padx=10, pady=5, fg="white", bg="#263D42", command=addApp) #Be descriptive with names \ Command is used to link the button to a function/method that will allow it to do stuff DO NOT ADD THE () WHEN CALLING THE FUNCTION OR IT WILL RUN THE FUNCTION AS SOON AS THE WINDOW LOADS!!!!
 open_file_button.pack()
 
-run_apps_button = tk.Button(root, text="Run Applications", padx=10, 
-                            pady=5, fg="white", bg="#263D42") #Be descriptive with names
+run_apps_button = tk.Button(root, text="Run Applications", padx=10, pady=5, fg="white", bg="#263D42")
 run_apps_button.pack()
 
-for app in apps:  #Puts the data from the save file from ours screen
+for app in apps:  #Puts the data on the save file from ours screen
     label = tk.Label(frame, text=app)
     label.pack()
 
-root.mainloop() #Run all in the body of the application
+root.mainloop()
 
 #Create save file four chosen apps
-with open('save.txt', 'w') as f: #Whenever we close the app were gonna save a text file written as f and with f we can write all the apps we saved in the app
+with open('save.txt', 'w') as f:
     for app in apps:
         f.write(app + ',') 
